@@ -1,0 +1,40 @@
+name: 김용환
+headline: 데이터 엔지니어 · RAG 엔지니어
+intro:
+  - 수집·정제·적재 ETL 파이프라인과 Airflow 워크플로우 자동화를 설계·운영합니다.
+  - Elasticsearch·LLM 기반 검색(RAG) 데이터 파이프라인과 챗봇 평가 체계를 구축합니다.
+email: k55183@naver.com
+github: kimyonghwan1996
+careers:
+  - company: 애자일소다
+    role: 데이터 엔지니어 · RAG 엔지니어
+    period: "2026.09 ~ 재직중"
+  - company: 더존비즈온
+    desc: 국내 ERP 서비스 대표 업체
+    role: 데이터 엔지니어
+    period: 2024.07 ~ 2025.08
+education:
+  - name: 한양대학교 ERICA
+    period: 2024.08 졸업
+training:
+  - name: 한양대학교 비즈니스 빅데이터 연구모임
+    period: 2022.09 ~ 2022.11
+  - name: 2023 데이터 청년 캠퍼스
+    period: 2023.06 ~ 2023.08
+  - name: NaverCloudCamp DevOps 과정
+    period: 2023.12 ~ 2024.06
+  - name: MLOps와 온디바이스AI 단기 과정
+    period: 2026.02 ~ 2026.03
+  - name: LLM과 LangChain API를 활용한 Agent 서비스 개발
+    period: 2026.05 ~ 2026.06
+  - name: 한양대 청년도약 AI 부트캠프
+    period: 2026.08
+certifications:
+  - name: ADsP
+    date: 2022.09
+  - name: 빅데이터전문가
+    date: 2022.07
+  - name: Naver Cloud Platform Professional
+    date: 2024.04
+  - name: 정보처리기사 (필기)
+    date: 2025.08
