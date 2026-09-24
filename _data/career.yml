@@ -272,3 +272,42 @@
     C --> D[(MongoDB)]
     D --> E[Excel / Validation]
   github: https://github.com/kimyonghwan1996/scrapy-crawling
+- id: career-bot-pipeline
+  type: personal
+  company: 개인 프로젝트
+  project: 경력기술서 주간 자동 갱신 파이프라인 (career-bot)
+  period: 2026.09 ~ 진행중
+  role:
+  - Data Engineer
+  - RAG Engineer
+  stack:
+  - Python
+  - PyYAML
+  - Airflow
+  - GitHub Actions
+  - Claude Code
+  summary: agentmemory 세션 수집 → LLM 후보 선정 → 결정적 병합 → PR 발행 자동화
+  achievements:
+  - agentmemory REST API에서 세션·관찰 데이터 수집 모듈 구현
+  - claude -p 기반 후보 선정 + 재시도 + 스키마 검증 구조 설계
+  - 중복 제거 규칙 기반 career.yml 결정적 병합 로직 구현
+  - git 브랜치·커밋·PR 발행 및 macOS 알림 자동화
+  - launchd 기반 주간 실행 오케스트레이션(dry-run, 실행 횟수 제한) 구현
+  - 전체 테스트 스위트 51건 통과 확인 후 실 데이터 드라이런 검증
+- id: career-blog-migration
+  type: personal
+  company: 개인 프로젝트
+  project: GitHub Pages 경력 블로그 구축 및 노션 경력기술서 이전
+  period: '2026.09'
+  role:
+  - Data Engineer
+  stack:
+  - Jekyll
+  - Ruby
+  - GitHub Actions
+  - YAML
+  summary: Chirpy 테마 블로그 신규 구축 후 노션 경력기술서를 데이터 기반 페이지로 이전
+  achievements:
+  - career.yml·profile.yml 데이터 분리 설계로 경력 항목 12건 구조화
+  - GitHub Actions 배포 파이프라인 구성, 빌드 검증 스크립트로 누락 항목 확인
+  - 빌드 시 프로젝트명·mermaid 다이어그램·순서 자동 검증 로직 작성
