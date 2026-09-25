@@ -36,13 +36,6 @@ mermaid: true
 {% for a in e.achievements -%}
 - {{ a }}
 {% endfor %}
-{% if e.troubleshooting %}
-**트러블슈팅**
-
-{% for t in e.troubleshooting -%}
-- **문제** {{ t.problem }} → **조치** {{ t.fix }} → **결과** {{ t.result }}
-{% endfor %}
-{% endif %}
 {% endfor %}
 
 ## 개인 프로젝트
@@ -62,6 +55,20 @@ mermaid: true
 ```
 {% endif %}
 {% if e.github %}[GitHub]({{ e.github }}){% endif %}
+{% endfor %}
+
+## 트러블슈팅
+
+{% assign ts_count = 0 -%}
+{% for e in site.data.career -%}
+{% if e.troubleshooting %}{% assign ts_count = ts_count | plus: e.troubleshooting.size %}{% endif -%}
+{% endfor -%}
+{% if ts_count == 0 %}- 정리 중
+{% endif -%}
+{% for e in site.data.career -%}
+{% for t in e.troubleshooting -%}
+- **[{{ e.project }}]** {{ t.problem }} → {{ t.fix }} → **{{ t.result }}**
+{% endfor -%}
 {% endfor %}
 
 ## 학력 · 교육 · 자격
