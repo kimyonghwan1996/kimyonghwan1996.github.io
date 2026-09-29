@@ -19,6 +19,12 @@
   - 예금·대출·펀드 등 7개 상품군 DDL → ES 인덱스 매핑 설계
   - Airflow(KubernetesExecutor) 기반 상품 데이터 적재 배치 설계
   - 설명요약·예상질문 메타데이터 필드로 RAG 검색 확장 구조 설계
+  - 교재 PDF RAG 적재 실행, ES 482청크 적재·요약임베딩 100% 완료
+  - 검색 평가셋 22문항 구축, BM25·벡터·하이브리드 Hit@5 비교 자동화
+  troubleshooting:
+  - problem: 표 열 이름이 '----'로 오적재(7청크)
+    fix: LlamaParse 구분선 오인 원인 파악 후 구분선 행 제거·재적재
+    result: 오류 청크 7→0, 표 질의 벡터 MRR 0.85→0.92
 - id: bank-chatbot-stress-eval
   type: work
   company: 애자일소다
