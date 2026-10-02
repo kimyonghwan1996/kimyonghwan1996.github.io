@@ -21,10 +21,21 @@
   - 설명요약·예상질문 메타데이터 필드로 RAG 검색 확장 구조 설계
   - 교재 PDF RAG 적재 실행, ES 482청크 적재·요약임베딩 100% 완료
   - 검색 평가셋 22문항 구축, BM25·벡터·하이브리드 Hit@5 비교 자동화
+  - 아르미 KMS HTML 추출 파이프라인 구축, 표 37개 변환·52청크 적재, 누출 0건
+  - HTML 문서 검색·답변 평가셋 27문항 구축, 정답률 26/27
+  - 좌표형 HTML 표 밖 텍스트를 좌표 기반 복구, 106줄 복구 손실 0건
+  - 경제금융용어 700선 사전 적재, 청크 707건 ES 적재
+  - bge-m3 벡터 양자화 비교 평가, bbq 적용으로 정확도 손실 없이 메모리 1/7 절감
   troubleshooting:
   - problem: 표 열 이름이 '----'로 오적재(7청크)
     fix: LlamaParse 구분선 오인 원인 파악 후 구분선 행 제거·재적재
     result: 오류 청크 7→0, 표 질의 벡터 MRR 0.85→0.92
+  - problem: 민감정보가 치환·누출검사를 동시 우회
+    fix: 허용규칙 보강, NFKC 정규화 적용
+    result: ES 저장값 52건 누출 0건
+  - problem: 교재 그림 설명을 모델이 지어냄(Docling 그림 오추출)
+    fix: 작은 이미지 제외 후 로컬 Qwen2.5-VL-7B로 설명 재생성
+    result: 그림 28개 제목·축·글자 추출 개선
 - id: bank-chatbot-stress-eval
   type: work
   company: 애자일소다
@@ -317,3 +328,34 @@
   - career.yml·profile.yml 데이터 분리 설계로 경력 항목 12건 구조화
   - GitHub Actions 배포 파이프라인 구성, 빌드 검증 스크립트로 누락 항목 확인
   - 빌드 시 프로젝트명·mermaid 다이어그램·순서 자동 검증 로직 작성
+- id: agilesoda-groupware-rag-collector
+  type: work
+  company: 애자일소다
+  project: 사내 그룹웨어 문서 수집·RAG 파이프라인
+  period: 2026.10 ~ 진행중
+  role:
+  - Data Engineer
+  - RAG Engineer
+  stack:
+  - Python
+  - Selenium
+  - Elasticsearch
+  - LangGraph
+  - bge-m3
+  summary: 그룹웨어 문서함 Selenium 수집 → 로컬 파싱·청킹·ES 적재 → LangGraph 기반 RAG 구축
+  achievements:
+  - 그룹웨어 문서함 Selenium 수집기 구축, 문서 169개 수집, 실패 0건
+  - sha1 중복·버전 제거 파일 카탈로그 구축, 234개 중 114개 적재 대상 선별
+  - LlamaParse를 로컬 파서(PyMuPDF4LLM·MarkItDown)로 전환, 114개 1분 40초·비용 0
+  - 청킹·bge-m3 임베딩·ES 적재 파이프라인 구축, 청크 3,248개·인덱스 6개·오류 0건
+  - LangGraph 기반 RAG(재작성·의도분류·BM25+벡터 RRF) 구현, 테스트 154개 통과
+  troubleshooting:
+  - problem: 그룹웨어 숨김 트리·목록 미갱신으로 문서 수집 0건
+    fix: 보이는 트리로 변경, 지연 로딩·행 안정화 대기 추가
+    result: 대상 폴더 문서·버전 전부 수집
+  - problem: 본문 청크 51%가 100자 미만 잡음
+    fix: 머리말·바닥글 제거, 조항 단위 청킹으로 전환
+    result: 100자 미만 비율 51%→43%
+  - problem: 쪽 경계에서 분리된 재무제표 표가 데이터 행을 머리글로 오직렬화
+    fix: 열 수 일치하는 다음 쪽 표 병합, 쪼개진 머리글 재결합
+    result: 현금흐름표가 원래 머리글로 정상 직렬화
