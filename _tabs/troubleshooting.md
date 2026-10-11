@@ -15,7 +15,7 @@ order: 2
 정리 중
 {%- endif %}
 {% for e in site.data.career %}{% if e.troubleshooting %}
-### {{ e.project }} · {{ e.company }}
+### {{ e.project }}
 
 {% for t in e.troubleshooting -%}
 - {{ t.problem }} → {{ t.fix }} → **{{ t.result }}**

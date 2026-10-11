@@ -3,7 +3,6 @@ layout: page
 title: 경력기술서
 icon: fas fa-briefcase
 order: 1
-mermaid: true
 ---
 {%- assign p = site.data.profile -%}
 {%- assign works = site.data.career | where: "type", "work" -%}
@@ -18,7 +17,7 @@ mermaid: true
 {% for line in p.intro -%}
 - {{ line }}
 {% endfor %}
-이메일 [{{ p.email }}](mailto:{{ p.email }}) · GitHub [{{ p.github }}](https://github.com/{{ p.github }}) · [트러블슈팅 {{ ts_count }}건 →]({{ '/troubleshooting/' | relative_url }})
+이메일 [{{ p.email }}](mailto:{{ p.email }}) · GitHub [{{ p.github }}](https://github.com/{{ p.github }}) · [개인 프로젝트 {{ personals.size }}건 →]({{ '/projects/' | relative_url }}) · [트러블슈팅 {{ ts_count }}건 →]({{ '/troubleshooting/' | relative_url }})
 
 ## 경력
 
@@ -40,25 +39,6 @@ mermaid: true
 {% for a in e.achievements -%}
 - {{ a }}
 {% endfor %}
-{% endfor %}
-
-## 개인 프로젝트
-{% for e in personals %}
-### {{ e.project }}
-
-**Stack** {{ e.stack | join: " · " }}
-
-{{ e.summary }}
-
-{% for a in e.achievements -%}
-- {{ a }}
-{% endfor %}
-{% if e.architecture %}
-```mermaid
-{{ e.architecture }}
-```
-{% endif %}
-{% if e.github %}[GitHub]({{ e.github }}){% endif %}
 {% endfor %}
 
 ## 학력 · 교육 · 자격
