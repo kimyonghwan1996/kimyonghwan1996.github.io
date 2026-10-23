@@ -2,7 +2,7 @@
   type: work
   company: 애자일소다
   client: NH농협은행
-  project: 통합챗봇 지식기반 검색 파이프라인
+  project: 지식기반 검색 RAG 파이프라인
   period: 2026.09 ~ 진행중
   role:
   - Data Engineer
