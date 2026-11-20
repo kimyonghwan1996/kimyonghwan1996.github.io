@@ -135,6 +135,43 @@
   achievements:
   - Airflow 증분 적재 + 알림톡 알림 구성
   - 소스별 수집 DB 설계·정제
+- id: oliveyoung-clone-ai-chatbot
+  type: personal
+  company: 개인 프로젝트
+  project: 올리브영 클론 AI 챗봇 (Text-to-SQL · 지점 재고 조회)
+  role:
+  - Data Engineer
+  - LLM Engineer
+  stack:
+  - AWS Bedrock (Claude, Converse Tool Use)
+  - AWS Lambda
+  - S3 Vectors
+  - Titan Embeddings v2
+  - FastAPI
+  - PostgreSQL
+  - Streamlit
+  - Docker Compose
+  summary: 쇼핑몰 클론 위에 자연어 질문을 SQL·벡터 검색으로 바꿔 답하는 상품 추천·지점 재고 챗봇 구축 (Lambda·챗봇 담당)
+  achievements:
+  - Bedrock Converse Tool Use로 질문 의도 분류 → 5개 검색 Tool 자동 선택 → 결과로 답변 생성 2단계 호출 구성
+  - Lambda 1개에 Tool 5종(브랜드·가격·상품명·시맨틱·지점 재고) 통합, 파라미터 바인딩 SQL로 RDS 조회
+  - '시맨틱 검색: Titan Embeddings v2(1024차원) → S3 Vectors 코사인 인덱스, 피부 고민·효능 질문 대응'
+  - '지점 재고 데모 데이터 추가: 매장 12곳 × 재고 456건, 지점명·주소 ILIKE 검색으로 ''○○점에 △△ 있어?'' 응답'
+  - Streamlit 챗봇 UI + FastAPI 백엔드 + Nginx 프론트를 Docker Compose 4개 서비스로 구성
+  troubleshooting:
+  - problem: Lambda 경유 구조가 로컬 개발·디버깅을 느리게 함
+    fix: ECS(FastAPI) 안에서 Tool을 직접 실행하는 chat 라우터를 추가해 Lambda 없이도 동일 동작
+    result: 로컬 docker compose만으로 전체 흐름 재현
+  architecture: |
+    flowchart LR
+    U[사용자 질문] --> S[Streamlit]
+    S --> B[Bedrock Claude<br/>Converse Tool Use]
+    B -->|tool 선택| L[Lambda: 5 tools]
+    L --> P[(PostgreSQL<br/>상품·매장·재고)]
+    L --> V[(S3 Vectors<br/>Titan 1024d)]
+    L --> B
+    B --> A[추천·재고 답변]
+  github: https://github.com/kimyonghwan1996/oliveyoung-porject
 - id: smart-factory-data-agent
   type: personal
   company: 개인 프로젝트
