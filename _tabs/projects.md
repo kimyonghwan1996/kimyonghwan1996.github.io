@@ -17,7 +17,11 @@ excerpt_separator: ""
     <li>{{ a }}</li>
   {%- endfor %}
   </ul>
-{%- if e.architecture %}
+{%- capture flow_path %}/assets/flows/{{ e.id }}.html{% endcapture %}
+{%- assign flow = site.static_files | where: "path", flow_path | first %}
+{%- if flow %}
+  <iframe class="cv-flow" src="{{ flow_path | relative_url }}" title="{{ e.project }} 흐름 다이어그램" loading="lazy"></iframe>
+{%- elsif e.architecture %}
 
 ```mermaid
 {{ e.architecture }}
